@@ -1,0 +1,44 @@
+// 3) Design the Logic to Find a Missing Number in a Sorted Array. Given an array of n-1 distinct integers in the range of 1 to n, find the missing number in it in a Sorted Array
+//(a) Linear time
+//(b) Using binary search
+
+// (a)
+#include <iostream>
+using namespace std;
+int main(){
+    int n;
+    cout<<"Enter n: ";
+    cin>>n;
+    int a[n-1];
+    int sum=0;
+    cout<<"Enter "<<n-1<<" numbers: ";
+    for(int i=0;i<n-1;i++){
+        cin>>a[i];
+        sum+=a[i];
+    }
+    int total=n*(n+1)/2;
+    cout<<"Missing number is "<<total-sum;
+}
+
+
+//(b)
+#include <iostream>
+using namespace std;
+int main(){
+    int n;
+    cout<<"Enter n: ";
+    cin>>n;
+    int a[n-1];
+    cout<<"Enter "<<n-1<<" sorted numbers: ";
+    for(int i=0;i<n-1;i++) cin>>a[i];
+    int l=0,h=n-2,mid,miss=n;
+    while(l<=h){
+        mid=(l+h)/2;
+        if(a[mid]==mid+1) l=mid+1;
+        else{
+            miss=mid+1;
+            h=mid-1;
+        }
+    }
+    cout<<"Missing number is "<<miss;
+}
