@@ -17,3 +17,64 @@ int main(){
     for(int i=0;i<n;i++)
         cout<<t[i][0]<<" "<<t[i][1]<<" "<<t[i][2]<<endl;
 }
+//(b) Addition of two matrices.
+#include <iostream>
+using namespace std;
+int main(){
+    int a[10][3],b[10][3],c[20][3],m,n,x,y;
+    cout<<"Enter size of first matrix: ";
+    cin>>m>>n>>x;
+    for(int i=0;i<x;i++) cin>>a[i][0]>>a[i][1]>>a[i][2];
+    cout<<"Enter size of second matrix: ";
+    cin>>m>>n>>y;
+    for(int i=0;i<y;i++) cin>>b[i][0]>>b[i][1]>>b[i][2];
+    int i=0,j=0,k=0;
+    while(i<x && j<y){
+        if(a[i][0]==b[j][0] && a[i][1]==b[j][1]){
+            c[k][0]=a[i][0];
+            c[k][1]=a[i][1];
+            c[k][2]=a[i][2]+b[j][2];
+            i++;j++;k++;
+        }
+        else if(a[i][0]<b[j][0] || (a[i][0]==b[j][0] && a[i][1]<b[j][1])){
+            c[k][0]=a[i][0]; c[k][1]=a[i][1]; c[k][2]=a[i][2]; i++;k++;
+        }
+        else{
+            c[k][0]=b[j][0]; c[k][1]=b[j][1]; c[k][2]=b[j][2]; j++;k++;
+        }
+    }
+    while(i<x){c[k][0]=a[i][0];c[k][1]=a[i][1];c[k][2]=a[i][2];i++;k++;}
+    while(j<y){c[k][0]=b[j][0];c[k][1]=b[j][1];c[k][2]=b[j][2];j++;k++;}
+    cout<<"Result:\n";
+    for(int p=0;p<k;p++) cout<<c[p][0]<<" "<<c[p][1]<<" "<<c[p][2]<<endl;
+}
+
+
+// 6 (c) Multiplication of two matrices
+#include <iostream>
+using namespace std;
+int main(){
+    int a[10][3],b[10][3],c[20][3],r1,c1,r2,c2,x,y,k=0;
+    cout<<"Enter r1 c1 and number of terms: ";
+    cin>>r1>>c1>>x;
+    for(int i=0;i<x;i++) cin>>a[i][0]>>a[i][1]>>a[i][2];
+    cout<<"Enter r2 c2 and number of terms: ";
+    cin>>r2>>c2>>y;
+    for(int i=0;i<y;i++) cin>>b[i][0]>>b[i][1]>>b[i][2];
+    if(c1!=r2){
+        cout<<"Not possible";
+        return 0;
+    }
+    for(int i=0;i<x;i++){
+        for(int j=0;j<y;j++){
+            if(a[i][1]==b[j][0]){
+                c[k][0]=a[i][0];
+                c[k][1]=b[j][1];
+                c[k][2]=a[i][2]*b[j][2];
+                k++;
+            }
+        }
+    }
+    cout<<"Multiplication result:\n";
+    for(int i=0;i<k;i++) cout<<c[i][0]<<" "<<c[i][1]<<" "<<c[i][2]<<endl;
+}
